@@ -1,6 +1,8 @@
 package android.itesm.edu.pokemon.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.itesm.edu.pokemon.PokeCardActivity;
 import android.itesm.edu.pokemon.R;
 import android.itesm.edu.pokemon.model.PokeCard;
 import android.support.annotation.NonNull;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -37,7 +40,11 @@ public class PokeRecycleAdapter extends RecyclerView.Adapter<PokeRecycleAdapter.
         pokeRecordHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                PokeCard pokeCard = cards.get(pokeRecordHolder.getAdapterPosition());
+                Toast.makeText(context,pokeCard.getName(),Toast.LENGTH_SHORT).show();
+                Intent it = new Intent(context, PokeCardActivity.class);
+                it.putExtra("pokemon", pokeCard);
+                context.startActivity(it);
             }
         });
         return pokeRecordHolder;
